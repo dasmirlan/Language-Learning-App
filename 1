@@ -1,0 +1,30 @@
+import React, { useState } from 'react';
+
+function FlashcardsApp() {
+  const [words, setWords] = useState([
+    { word: 'Hello', translation: 'Привет' },
+    { word: 'World', translation: 'Мир' },
+  ]);
+  const [index, setIndex] = useState(0);
+  const [showTranslation, setShowTranslation] = useState(false);
+
+  const nextWord = () => {
+    setShowTranslation(false);
+    setIndex((prev) => (prev + 1) % words.length);
+  };
+
+  return (
+    <div>
+      <h1>Flashcards</h1>
+      <div>
+        <p>{showTranslation ? words[index].translation : words[index].word}</p>
+        <button onClick={() => setShowTranslation(!showTranslation)}>
+          {showTranslation ? 'Show Word' : 'Show Translation'}
+        </button>
+        <button onClick={nextWord}>Next</button>
+      </div>
+    </div>
+  );
+}
+
+export default FlashcardsApp;
